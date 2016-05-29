@@ -48,3 +48,7 @@ val DIVIDES_RMUL=top_thm();
 g `!m n. m divides n ==> (m <= n) \/ (n = 0 )`;
 e (ARW_TAC[divides] THEN Cases_on `x` THEN ARW_TAC [] THEN ARW_TAC []);
 val DIVIDES_LE=store_thm ( "DIVIDES_LE", ``!m n. m divides n ==> (m <= n) \/ (n = 0 )``,ARW_TAC[divides] THEN Cases_on `x` THEN ARW_TAC [] THEN ARW_TAC []);
+
+
+g `!m n. 0 < m /\ m <=n ==> m divides (FACT n)`;
+e (ARW_TAC [LESS_EQ_EXISTS] THEN Induct_on `p` THEN ARW_TAC [ADD_CLAUSES] THEN Induct_on `m` THEN ARW_TAC [FACT,divides]) ;
