@@ -55,3 +55,7 @@ val DIVIDES_FACT = store_thm ("DIVIDES_FACT", ``!m n. 0 < m /\ m <=n ==> m divid
                   ARW_TAC [FACT,DIVIDES_RMUL, DIVIDES_REFL]],
 	     ARW_TAC [FACT, ADD_CLAUSES] THEN PROVE_TAC [DIVIDES_RMUL]]);
 
+(* alternative proof using induction on `n-m` *)
+val lemma=store_thm ( "lemma", ``!m. 0 < m ==> ?k. m = SUC k``, Cases THEN ARW_TAC []);
+
+val DIVIDES_FACT = store_thm ("DIVIDES_FACT", ``!m n. 0 < m /\ m <=n ==> m divides (FACT n)``, Induct_on `n-m` THEN REPEAT STRIP_TAC THENL [`m=n` by DECIDE_TAC, ALL_TAC] THEN ARW_TAC [] THENL [ `?k. m = SUC k` by PROVE_TAC [lemma] THEN ARW_TAC [FACT,DIVIDES_LMUL, DIVIDES_REFL], ALL_TAC] THEN `0 < n` by DECIDE_TAC THEN `?k. n = SUC k` by PROVE_TAC [lemma] THEN ARW_TAC [FACT,DIVIDES_RMUL,DIVIDES_REFL]);
