@@ -48,3 +48,5 @@ val NOT_PRIME_1 = store_thm("NOT_PRIME_1", ``~prime 1``, ARW_TAC [prime]);
 val PRIME_2 = store_thm("PRIME_2", ``prime 2``, ARW_TAC [prime] THEN PROVE_TAC [ DIVIDES_LE , DIVIDES_ZERO, DECIDE ``~(2=1)``, DECIDE ``~(2=0)``, DECIDE `` x<=2 = (x=0) \/ (x=1) \/ (x=2)``]);
 
 val PRIME_POS = store_thm("PRIME_POS", ``!p. prime p ==> 0<p``, Cases THEN ARW_TAC[NOT_PRIME_0]);
+
+val PRIME_FACTOR = store_thm("PRIME_FACTOR", ``!n. ~(n = 1) ==> ?p. prime p ∧ p divides n``, completeInduct_on `n` THEN ARW_TAC [] THEN Cases_on `prime n` THENL [PROVE_TAC [DIVIDES_REFL], ALL_TAC] THEN  `?x. x divides n /\ ~(x=1) /\ ~(x=n)` by PROVE_TAC [prime] THEN PROVE_TAC [LESS_OR_EQ, PRIME_2, DIVIDES_LE,DIVIDES_TRANS,DIVIDES_0]);
