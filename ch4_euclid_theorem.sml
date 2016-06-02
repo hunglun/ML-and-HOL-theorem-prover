@@ -18,7 +18,7 @@ val DIVIDES_ADD = store_thm("DIVIDES_ADD",``!a b c. a divides b /\ a divides c =
 
 val DIVIDES_SUB = store_thm("DIVIDES_SUB",``!a b c. a divides b /\ a divides c ==> a divides (b-c)``,ARW_TAC[divides] THEN EXISTS_TAC ``x-x'`` THEN ARW_TAC [LEFT_SUB_DISTRIB]);
 
-val DIVIDES_ADD = store_thm("DIVIDES_ADD",``!d a b. d divides a /\ d divides (a+b) ==> d divides b``,ARW_TAC[divides] THEN EXISTS_TAC ``x'-x`` THEN ARW_TAC [LEFT_SUB_DISTRIB]);
+val DIVIDES_ADDL = store_thm("DIVIDES_ADDL",``!d a b. d divides a /\ d divides (a+b) ==> d divides b``,ARW_TAC[divides] THEN EXISTS_TAC ``x'-x`` THEN ARW_TAC [LEFT_SUB_DISTRIB]);
 
 val DIVIDES_LMUL = store_thm("DIVIDES_LMUL",``!d a x. d divides a ==> d divides (x * a)``,ARW_TAC[divides] THEN EXISTS_TAC ``x'*x`` THEN ARW_TAC [MULT_ASSOC]);
 
@@ -50,3 +50,15 @@ val PRIME_2 = store_thm("PRIME_2", ``prime 2``, ARW_TAC [prime] THEN PROVE_TAC [
 val PRIME_POS = store_thm("PRIME_POS", ``!p. prime p ==> 0<p``, Cases THEN ARW_TAC[NOT_PRIME_0]);
 
 val PRIME_FACTOR = store_thm("PRIME_FACTOR", ``!n. ~(n = 1) ==> ?p. prime p ∧ p divides n``, completeInduct_on `n` THEN ARW_TAC [] THEN Cases_on `prime n` THENL [PROVE_TAC [DIVIDES_REFL], ALL_TAC] THEN  `?x. x divides n /\ ~(x=1) /\ ~(x=n)` by PROVE_TAC [prime] THEN PROVE_TAC [LESS_OR_EQ, PRIME_2, DIVIDES_LE,DIVIDES_TRANS,DIVIDES_0]);
+
+
+val PRIME_INFINITE = store_thm("PRIME_INFINITE", ``!n. ?p. prime p /\ p > n``,CCONTR_TAC 
+THEN  `?n. !p. ~ ( prime p /\ p > n)` by PROVE_TAC []
+THEN   `~(FACT n + 1 = 1)` by ARW_TAC [FACT_LESS, DECIDE ``~(x=0) = 0<x``]
+THEN  `?p. prime p /\ p divides (FACT n + 1)` by PROVE_TAC [PRIME_FACTOR]
+THEN   `p <= n` by PROVE_TAC[NOT_GREATER]
+THEN  ` 0 < p ` by PROVE_TAC[PRIME_POS]
+THEN   `p divides FACT n` by PROVE_TAC[DIVIDES_FACT]
+THEN  `p divides 1` by PROVE_TAC[DIVIDES_ADDL]
+THEN  `p = 1` by PROVE_TAC[DIVIDES_ONE]
+THEN  PROVE_TAC[NOT_PRIME_1])
