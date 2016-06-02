@@ -1,7 +1,10 @@
+open HolKernel boolLib Parse bossLib
+
 open arithmeticTheory;
+val _ = new_theory "euclid";
 
 val divides = Define `divides a b = ?x. a * x = b`;
-set_fixity "divides" (Infixr 451);
+val _ = set_fixity "divides" (Infixr 451);
 val ARW_TAC = RW_TAC arith_ss;
 
 val DIVIDES_0 = store_thm("DIVIDES_0",``!x. x divides 0``,ARW_TAC [divides] THEN EXISTS_TAC ``0`` THEN ARW_TAC[]);
@@ -62,3 +65,5 @@ THEN   `p divides FACT n` by PROVE_TAC[DIVIDES_FACT]
 THEN  `p divides 1` by PROVE_TAC[DIVIDES_ADDL]
 THEN  `p = 1` by PROVE_TAC[DIVIDES_ONE]
 THEN  PROVE_TAC[NOT_PRIME_1])
+
+val _ = export_theory();			      
