@@ -1,0 +1,10 @@
+<<HOL message: Created theory "resetReg">>
+Saved definition __ "ONE_def"
+Saved definition __ "NOT_def"
+Saved definition __ "MUX_def"
+Saved definition __ "REG_def"
+Saved definition __ "RESET_REG_SPEC_def"
+Saved definition __ "RESET_REG_IMP_def"
+Saved theorem _____ "RESET_REG_CORRECT"
+Exporting theory "resetReg" ... done.
+Theory "resetReg" took 0.60440s to build

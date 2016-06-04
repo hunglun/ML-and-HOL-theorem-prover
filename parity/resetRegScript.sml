@@ -1,3 +1,8 @@
+open HolKernel boolLib Parse bossLib
+
+
+
+val _ = new_theory "resetReg"
 
 
 (* Definition of circuit components *)
@@ -30,3 +35,4 @@ val RESET_REG_CORRECT = store_thm("RESET_REG_CORRECT", ``!reset input out. RESET
 
 (* TODO A more stringent specification that version 2 does not satisfy *)
 (* val RESET_REG_SPEC_def = Define `RESET_REG_SPEC(reset,input,out) = (out 0 = T) /\ (!t. reset t ==> (out t = T)) /\  !t. out (t+1) = if (reset t \/ reset(t+1)) then T else input t`; *)
+val _ = export_theory()

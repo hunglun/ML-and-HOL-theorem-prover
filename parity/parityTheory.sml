@@ -13,8 +13,8 @@ struct
   in end;
   val _ = Theory.link_parents
           ("parity",
-          Arbnum.fromString "1464984724",
-          Arbnum.fromString "290122")
+          Arbnum.fromString "1465040210",
+          Arbnum.fromString "568687")
           [("rich_list",
            Arbnum.fromString "1463056303",
            Arbnum.fromString "112681"),

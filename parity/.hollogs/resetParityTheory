@@ -1,7 +1,8 @@
-<<HOL message: Created theory "parity">>
+<<HOL message: Created theory "resetParity">>
 Saved theorem _____ "PARITY_def_compute"
 Saved definition __ "PARITY_def"
 Saved theorem _____ "UNIQUENESS_LEMMA"
+Saved theorem _____ "parity0"
 Saved definition __ "ONE_def"
 Saved definition __ "NOT_def"
 Saved definition __ "MUX_def"
@@ -9,5 +10,5 @@ Saved definition __ "REG_def"
 Saved definition __ "PARITY_IMP_def"
 Saved theorem _____ "PARITY_LEMMA"
 Saved theorem _____ "PARITY_CORRECT"
-Exporting theory "parity" ... done.
-Theory "parity" took 0.91686s to build
+Exporting theory "resetParity" ... done.
+Theory "resetParity" took 0.74145s to build
